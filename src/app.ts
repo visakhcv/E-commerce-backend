@@ -9,6 +9,8 @@ import dotenv from 'dotenv';
 import path from 'path'
 import indexRoutes from './Routes/index.routes';
 import productCategoryRouter from './Routes/productCategory.routes';
+import subProductCategoryRouter from './Routes/subProductCategory.routes';
+import ProductItemsRouter from './Routes/productItems.routes';
 
 export class App {
     private app: Application;
@@ -53,6 +55,8 @@ export class App {
     routes() {
         this.app.use(indexRoutes);
         this.app.use('/productcategory',productCategoryRouter)
+        this.app.use('/subproductcategory',subProductCategoryRouter)
+        this.app.use('/productitems',ProductItemsRouter)
       // this.app.use('/product-categories', productCategoryRouter)
       // this.app.use('/products', productRouter)
   
