@@ -97,4 +97,39 @@ export class ProductItemsController {
        
     }
 
+    public async getProductItemById(req: Request, res: Response){
+        try{
+            const {id} = req.params
+            const productId = Number(id)
+            const entityManager = AppDataSource.createEntityManager();
+
+            const product = await entityManager.findOne(productItems,{
+                where:{productItemsId:productId}
+            })
+            if(!product){
+                const response: IResponse = { status: false, message: 'product not found' };
+                res.status(404).json(response);
+                return;
+            }
+
+            //generating imageUrl for images
+            product.imageUrl = await getObjectSignedUrl(product.productItemsImage)
+            
+            // success 
+            const response: IResponse = {
+                status: true,
+                message: 'product retrieved successfully',
+                data: product as any,
+            };
+            res.status(200).json(response);
+            
+
+        } 
+        catch(err:any){
+            const response: IResponse = { status: false, message: 'An error occurred while creating the product item.', data: err };
+            res.status(500).json(response);
+        }
+    }
+
+
 }
