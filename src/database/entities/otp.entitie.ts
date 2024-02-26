@@ -1,21 +1,19 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, BeforeInsert, DeleteDateColumn } from 'typeorm'
+import { Entity,Column,PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 
-
-@Entity()
-export class otpVerification {
+@Entity({name:'otpverification'})
+export class OTPverification{
     @PrimaryGeneratedColumn()
-    id: number;
+    id:number
 
     @Column()
-    userid: number;
+    userid:number
 
     @Column()
-    otp: number;
+     otp:number
+    
+    @CreateDateColumn()
+    created_at:Date
 
-    @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
-
-    @DeleteDateColumn({ type: 'timestamp', nullable: true })
-    deletedAt: Date;
-
+    @Column()
+    expired_at:Date
 }
