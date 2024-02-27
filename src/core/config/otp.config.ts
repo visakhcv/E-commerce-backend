@@ -1,5 +1,7 @@
+import { randomInt } from "crypto";
 import { OTPverification } from "../../database/entities/otp.entitie";
 import { AppDataSource } from "./database";
+
 
 
 export class otpStore {
@@ -15,5 +17,5 @@ export class otpStore {
 }
 
 export const otpCode= ()=>{
-    return Math.floor(1000+ Math.random() * 9000)
+    return randomInt(100000 , 1000000)
 }
