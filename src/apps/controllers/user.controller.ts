@@ -147,7 +147,7 @@ export class userController {
                 const jwtToken = new jwtMiddlewareController()
                 const tokens = await jwtToken.jwtTokenGenerator(userExist.id)
 
-                const response: IResponse = { status: true, message: 'Logged In', data: { 'tokens': tokens, 'userid': userExist.id } };
+                const response: IResponse = { status: true, message: 'Logged In', data: { 'tokens': tokens, 'user': userExist } };
                 res.status(200).json(response);
 
 
