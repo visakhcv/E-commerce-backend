@@ -13,6 +13,7 @@ import subProductCategoryRouter from './Routes/subProductCategory.routes';
 import ProductItemsRouter from './Routes/productItems.routes';
 import UserRouter from './Routes/user.routes';
 import cartRouter from './Routes/cart.routes';
+import razorpayRouter from './Routes/razorpay.routes';
 
 export class App {
     private app: Application;
@@ -61,6 +62,7 @@ export class App {
         this.app.use('/subproductcategory',subProductCategoryRouter)
         this.app.use('/productitems',ProductItemsRouter)
         this.app.use('/cart',cartRouter)
+        this.app.use('/api/payment',razorpayRouter)
       // this.app.use('/product-categories', productCategoryRouter)
       // this.app.use('/products', productRouter)
   
