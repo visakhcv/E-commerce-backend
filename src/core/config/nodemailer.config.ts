@@ -37,7 +37,7 @@ export class mailConfig {
       if (!res.headersSent) {
         res.status(200).json({
           status: 'success',
-          message: 'Email sent to your mail',
+          message: 'OTP sent to your mail',
           email: email
         });
       }
