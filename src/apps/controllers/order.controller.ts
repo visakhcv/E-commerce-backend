@@ -7,6 +7,7 @@ import { productItems } from "../../database/entities/ProductItems.entitie";
 import { CartDetails } from "../../database/entities/cartItems.entitie";
 import { UserAddress } from "../../database/entities/userAddress.entitie";
 import { createHash } from 'crypto';
+import { otpCode } from "../../core/config/otp.config";
 
 export class OrderController {
     public async createOrder(req: Request, res: Response) {
@@ -50,11 +51,8 @@ export class OrderController {
 
             // // Create an array to store order history entries
             const orderHistoryEntries: OrderHistory[] = [];
-             // Create a hash using crypto
-             const timestamp = new Date().getTime(); // Current timestamp
-             const hash = createHash('sha256');
-             hash.update(timestamp.toString());
-             const uniqueId = hash.digest('hex');
+             
+            const randomCode = otpCode()
             // // Iterate through each cart item and create an OrderHistory entry
             for (const cartItem of cartItems) {
                 const product = await connection.findOne(productItems, {
@@ -72,7 +70,7 @@ export class OrderController {
 
                 const newOrderHistory = new OrderHistory();
                 newOrderHistory.user = user;
-                newOrderHistory.razorOrderId = (`${timestamp}-${uniqueId}`).slice(0,6)
+                newOrderHistory.razorOrderId = randomCode
                 newOrderHistory.product = product.productItemsId as any
                 newOrderHistory.quantity = cartItem.quantity;
                 newOrderHistory.address = addresses?.id as any

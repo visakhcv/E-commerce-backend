@@ -11,7 +11,7 @@ export class OrderHistory {
     id: number;
 
     @Column()
-    razorOrderId: string;
+    razorOrderId: number;
 
     @Column()
     quantity: number;
