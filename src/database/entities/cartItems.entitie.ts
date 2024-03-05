@@ -1,6 +1,8 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { UserModel } from "./user.entitie";
 import { productItems } from "./ProductItems.entitie";
+import { OrderHistory } from "./order.entitie";
+
 
 @Entity()
 export class CartDetails{
@@ -34,4 +36,6 @@ export class CartDetails{
         })
         @JoinColumn({name: 'userId' })
         user: UserModel;
+
+
 }
