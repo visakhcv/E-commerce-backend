@@ -15,11 +15,11 @@ if (env === 'dev') {
   password = '';
   database = 'new';
 } else if (env === 'prod') {
-  host = '';
-  port = 0;
-  username = '';
-  password = '';
-  database = '';
+  host = 'mysql-30ee8ddf-visakhvisa12345-25b8.a.aivencloud.com';
+  port = 22714;
+  username = 'avnadmin';
+  password = 'AVNS_7aAGen7SofnSR3MwI27';
+  database = 'defaultdb';
 } else if (env === 'uat') {
   host = '';
   port = 0;
@@ -39,4 +39,5 @@ export const AppDataSource = new DataSource({
   logging: true,
   entities: [pattern],
   migrations:['src/app/migrations/*.ts'],
+  
 });
