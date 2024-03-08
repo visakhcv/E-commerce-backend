@@ -8,6 +8,7 @@ import { CartDetails } from "../../database/entities/cartItems.entitie";
 import { UserAddress } from "../../database/entities/userAddress.entitie";
 import { createHash } from 'crypto';
 import { otpCode } from "../../core/config/otp.config";
+import { getObjectSignedUrl } from "../../core/config/awss3.config";
 
 export class OrderController {
     public async createOrder(req: Request, res: Response) {
@@ -119,7 +120,13 @@ export class OrderController {
                 const response: IResponse = { status: true, message: 'No orders yet' };
                 res.status(404).json(response);
             }
-            console.log(orderHistory);
+            
+
+            //generating imageUrl for images
+            for (let category of orderHistory) {
+                category.product.imageUrl = await getObjectSignedUrl(category.product.productItemsImage)
+
+            } 
 
 
             const response: IResponse = { status: true, message: 'Order created successfully', data: orderHistory };
