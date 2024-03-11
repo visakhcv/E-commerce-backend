@@ -14,7 +14,7 @@ export class ProductCategory{
     @Column()
     productCategory_name: string
 
-    @Column()
+    @Column({nullable:true})
     productCategory_imageUrl: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

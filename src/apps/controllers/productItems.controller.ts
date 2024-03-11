@@ -10,9 +10,10 @@ import { subProductCategory } from '../../database/entities/subCategory.entitie'
 export class ProductItemsController {
     public async CreateProductItems(req: Request, res: Response) {
         try {
-            const { productItemsName, productItemsDescription,price,offerPrice,productType, subCategory_name } = req.body
+            const { productItemsName, productItemsDescription,price,offerPrice,productType, subCategory_name,featured } = req.body
             const file = req.file as any
             const imageName = generateFileName()
+            const featuredMain= Number(featured)
 
             const entityManager = AppDataSource.createEntityManager();
             const existingproductitem = await entityManager.findOne(productItems, {
@@ -29,6 +30,13 @@ export class ProductItemsController {
             newProductItem.offerPrice= offerPrice
             newProductItem.price= price
             newProductItem.productType= productType
+
+            if(featuredMain == 1){
+            newProductItem.featured = true
+            }else{
+                newProductItem.featured= false
+            }
+            
             
             const existingSubProductCategory = await entityManager.findOne(subProductCategory, { where: { subProductCategoryName: subCategory_name } });
 
@@ -101,7 +109,7 @@ export class ProductItemsController {
         try{
             const {id} = req.params
             const productId = Number(id)
-            const entityManager = AppDataSource.createEntityManager();
+            const entityManager =await AppDataSource.createEntityManager();
 
             const product = await entityManager.findOne(productItems,{
                 where:{productItemsId:productId}
@@ -127,6 +135,32 @@ export class ProductItemsController {
         } 
         catch(err:any){
             const response: IResponse = { status: false, message: 'An error occurred while creating the product item.', data: err };
+            res.status(500).json(response);
+        }
+    }
+
+
+    // get featured products
+
+    public async getFeaturedProductItems(req: Request, res: Response){
+        try{
+            const connection = AppDataSource.createEntityManager()
+            const featured = await connection.find(productItems,{
+                where:{
+                    featured: true
+                }
+            })
+            for (let category of featured) {
+                category.imageUrl = await getObjectSignedUrl(category.productItemsImage)
+
+            }  
+            
+            const response: IResponse = { status: true, message: 'featured items retrived', data: featured };
+            res.status(200).json(response);
+            
+
+        }catch(err:any){
+            const response: IResponse = { status: false, message: 'An error occurred while creating the featured product item.', data: err };
             res.status(500).json(response);
         }
     }

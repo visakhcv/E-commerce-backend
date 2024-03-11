@@ -17,7 +17,7 @@ export class productItems{
     @Column()
     productItemsImage: string;
 
-    @Column()
+    @Column({nullable:true})
     imageUrl: string;
 
     @Column()
@@ -28,6 +28,9 @@ export class productItems{
 
     @Column()
     productType: string;
+
+    @Column({nullable:true})
+    featured: boolean
 
 
     @ManyToOne(() => subProductCategory, (subproductcategory) => subproductcategory.subProductCategoryId, {

@@ -18,7 +18,7 @@ export class subProductCategory{
     @Column()
     subProductCategoryImage: string;
 
-    @Column()
+    @Column({nullable:true})
     imageUrl: string;
 
 
