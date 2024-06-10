@@ -28,7 +28,7 @@ export class ProductCategoryController {
             newProductCategory.productCategory_name= category_name
             newProductCategory.productCategory_image= imageName
             newProductCategory.productCategory_desc= category_desc
-
+            
             await uploadFile(file.buffer, imageName , file.mimetype)
 
             const savedProductCategory = await entityManager.save(ProductCategory,newProductCategory)

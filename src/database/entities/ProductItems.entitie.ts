@@ -40,7 +40,7 @@ export class productItems{
       @JoinColumn({ name: 'subProductCategoryId' }) 
       subproductcategory: subProductCategory;
  
-    @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @CreateDateColumn({ type: 'timestamp', nullable: true })
     createdAt: Date;
   
     @DeleteDateColumn({ type: 'timestamp', nullable: true })

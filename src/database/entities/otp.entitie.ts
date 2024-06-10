@@ -11,9 +11,9 @@ export class OTPverification{
     @Column()
      otp:number
     
-    @CreateDateColumn()
+    @CreateDateColumn({nullable: true})
     created_at:Date
 
-    @Column()
+    @Column({nullable: true})
     expired_at:Date
 }

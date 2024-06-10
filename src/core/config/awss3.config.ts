@@ -3,10 +3,10 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 
 
-const bucketName = 'e-commerce-ba'
+const bucketName = 'officemart-images'
 const region = 'ap-south-1';
-const accessKeyId = 'AKIA2WB5NRQVGNJ6GQML'
-const secretAccessKey = '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'
+const accessKeyId = 'AKIAZI2LF6CAVGIWQ6GS'
+const secretAccessKey = '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'
 
 
 const s3Client = new S3Client({

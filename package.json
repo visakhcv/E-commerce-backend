@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
+    "tsc": "tsc",
+    "prepare": "npm run tsc",
     "dev": "nodemon src/index.ts --exec ts-node",
     "dev:migrate": "npx typeorm-ts-node-commonjs migration:run -d ./src/core/config/database.ts",
     "start": "node dist/index.js",
     "typeorm": "typeorm-ts-node-commonjs -d src/core/config/data-source.ts",
     "migration:show": "yarn typeorm migration:show",
-    "migration:create": "node src/core/helper/migration.js",
+    "migration:create": "node ./src/core/config/database.config.ts",
     "migration:revert": "yarn typeorm migration:revert",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

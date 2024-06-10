@@ -5,7 +5,6 @@ import cors from 'cors';
 import { Helper } from './core/helper/helper';
 import { IResponse } from './apps/models/iResponse.model';
 import 'reflect-metadata';
-import dotenv from 'dotenv';
 import path from 'path'
 import indexRoutes from './Routes/index.routes';
 import productCategoryRouter from './Routes/productCategory.routes';
@@ -15,6 +14,7 @@ import UserRouter from './Routes/user.routes';
 import cartRouter from './Routes/cart.routes';
 import razorpayRouter from './Routes/razorpay.routes';
 import orderRouter from './Routes/order.route';
+require('dotenv').config()
 
 export class App {
     private app: Application;
@@ -24,7 +24,6 @@ export class App {
   
     constructor() {
       this.helper = new Helper();
-      dotenv.config();
       this.app = express();
       this.settings();
       this.middleware();
@@ -34,7 +33,7 @@ export class App {
     }
   
     settings() {
-      this.app.set('port', 808);
+      this.app.set('port', 3000);
     }
   
     middleware() {

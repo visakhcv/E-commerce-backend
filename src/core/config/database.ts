@@ -1,10 +1,11 @@
 import path from 'path';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+require('dotenv').config()
 
 const pattern = path.join(__dirname, '/../..', 'database/entities/**.entitie{.js,.ts}');
 
-const env: string = 'dev';
+const env: string = 'prod';
 
 let host, port, username, password, database;
 
@@ -15,17 +16,20 @@ if (env === 'dev') {
   password = '';
   database = 'new';
 } else if (env === 'prod') {
-  host = 'mysql-30ee8ddf-visakhvisa12345-25b8.a.aivencloud.com';
-  port = 22714;
-  username = 'avnadmin';
-  password = 'AVNS_7aAGen7SofnSR3MwI27';
-  database = 'defaultdb';
+  host = process.env.db_admin;  
+  port = 3306;  
+  username = process.env.db_username;  
+  password = process.env.db_password;  
+  database = process.env.db_name;  
 } else if (env === 'uat') {
   host = '';
   port = 0;
   username = '';
   password = '';
   database = '';
+}
+if (!host || !username || !password || !database) {
+  throw new Error('Database configuration is incomplete.');
 }
 
 export const AppDataSource = new DataSource({
@@ -38,6 +42,5 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: true,
   entities: [pattern],
-  migrations:['src/app/migrations/*.ts'],
-  
+  // migrations:['src/app/migrations/*.ts'],
 });

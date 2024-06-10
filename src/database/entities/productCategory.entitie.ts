@@ -17,7 +17,7 @@ export class ProductCategory{
     @Column({nullable:true})
     productCategory_imageUrl: string;
 
-    @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @CreateDateColumn({ type: 'timestamp',nullable: true })
     createdAt: Date;
   
     @DeleteDateColumn({ type: 'timestamp', nullable: true })
